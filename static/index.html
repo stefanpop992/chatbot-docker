@@ -1,0 +1,19 @@
+<!doctype html>
+<title>Chatbot</title>
+<h1>Min chatbot</h1>
+<input id="q" size="60" placeholder="Skriv en fråga">
+<button onclick="ask()">Skicka</button>
+<pre id="a" style="white-space: pre-wrap"></pre>
+<script>
+async function ask() {
+  const a = document.getElementById("a");
+  a.textContent = "Tänker...";
+  const r = await fetch("/chat", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({question: document.getElementById("q").value})
+  });
+  const data = await r.json();
+  a.textContent = data.answer;
+}
+</script>
