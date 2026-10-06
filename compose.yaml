@@ -1,0 +1,11 @@
+services:
+  chatbot:
+    build: .
+    image: chatbot:1.0
+    ports:
+      - "8000:8000"
+    environment:
+      LLM_URL: http://host.docker.internal:11434/v1/chat/completions
+      LLM_MODEL: llama3:latest
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
